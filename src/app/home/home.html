@@ -1,0 +1,63 @@
+<p>{{ data }}</p>
+
+<div class="row">
+  <div class="col-lg-4">
+    <input type="text" [(ngModel)]="newStudent.name" class="form-control mb-4" placeholder="Name" />
+
+  </div>
+  <div class="col-lg-4">
+    <input type="number" [(ngModel)]="newStudent.age" class="form-control mb-4" placeholder="Age" />
+  </div>
+  <div class="col-lg-4">
+    <button class="btn btn-primary mb-4" (click)="addStudent()">Add Student</button>
+  </div>
+
+</div>
+
+<table class="table auto border-collapse border border-gray-400 p-2">
+  <tr class="border">
+    <th>ID</th>
+    <th>Name</th>
+    <th>Age</th>
+    <td>Action</td>
+  </tr>
+  @for (student of students; track $index) {
+  <tr class="border hover:bg-gray-100 cursor-pointer">
+    <td>{{ student.id }}</td>
+    <td>{{ student.name }}</td>
+    <td>{{ student.age }}</td>
+    <td><button class="btn btn-sm btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      (click)="editStudentDetails(student)"
+      >Edit</button></td>
+  </tr>
+  }
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Student</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-4">
+            <input type="text" [(ngModel)]="editStudent.name" class="form-control mb-4" placeholder="Name" />
+
+          </div>
+          <div class="col-lg-4">
+            <input type="number" [(ngModel)]="editStudent.age" class="form-control mb-4" placeholder="Age" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveStudentDetails()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
